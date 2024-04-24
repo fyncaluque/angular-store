@@ -14,7 +14,7 @@ export class CardComponent {
   public product = input.required<Product>();
   @Output() addToCartEvent = new EventEmitter<Product>();
 
-  onAddToCart() {
+  onAddToCart(): void {
     this.addToCartEvent.emit(this.product());
   }
 }

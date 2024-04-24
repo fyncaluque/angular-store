@@ -23,10 +23,10 @@
       <div class="space-y-4">
         <div class="relative overflow-hidden rounded-lg bg-gray-100">
           <img
-            src="https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600"
+            src="{{ product()?.image }}"
             loading="lazy"
-            alt="Photo by Himanshu Dewangan"
-            class="h-full w-full object-cover object-center"
+            alt="{{ product()?.title }}"
+            class="object-cover object-center w-full h-auto aspect-auto"
           />
 
           <span
@@ -38,12 +38,14 @@
       <!-- images - end -->
 
       <!-- content - start -->
-      <div class="md:py-8">
+      <div class="">
         <!-- name - start -->
         <div class="mb-2 md:mb-3">
-          <span class="mb-0.5 inline-block text-gray-500">Fancy Brand</span>
+          <span class="mb-0.5 inline-block text-gray-500">{{
+            product()?.category | titlecase
+          }}</span>
           <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl">
-            Pullover with pattern
+            {{ product()?.title }}
           </h2>
         </div>
         <!-- name - end -->
@@ -112,7 +114,7 @@
           <a
             href="#"
             class="ml-4 text-sm font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
-            >view all 47 reviews</a
+            >view all {{ product()?.rating?.count }} reviews</a
           >
         </div>
         <!-- rating - end -->
@@ -120,10 +122,7 @@
         <!-- description - start -->
         <div class="mb-10">
           <p class="text-gray-500">
-            This is a section of some simple filler text, also known as
-            placeholder text. It shares some characteristics of a real written
-            text but is random or otherwise generated. It may be used to display
-            a sample of fonts or generate text for testing.
+            {{ product()?.description }}
           </p>
         </div>
         <!-- description - end -->
@@ -131,9 +130,9 @@
         <!-- price - start -->
         <div class="mb-4">
           <div>
-            <span class="text-xl font-bold text-gray-800 md:text-3xl"
-              >$15.00</span
-            >
+            <span class="text-xl font-bold text-gray-800 md:text-3xl">{{
+              product()?.price | currency
+            }}</span>
           </div>
 
           <span class="text-sm text-gray-500">incl. VAT plus shipping</span>
@@ -165,11 +164,12 @@
         <!-- shipping notice - end -->
 
         <!-- buttons - start -->
-        <a
-          href="#"
+        <button
           class="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"
-          >Add to cart</a
+          (onclick)="onAddtoCart()"
         >
+          Add to cart
+        </button>
         <!-- buttons - end -->
       </div>
       <!-- content - end -->
